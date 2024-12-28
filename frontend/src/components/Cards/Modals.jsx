@@ -74,7 +74,7 @@ export const JobDetailsModal = ({ job, isOpen, onClose, onApply }) => {
             <button
                 onClick={handleApplyClick}
                 className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
-            n
+                n
             >
                 Apply Now
             </button>
@@ -113,7 +113,7 @@ export const ApplicationModal = ({ isOpen, onClose, onSubmit, opportunityId }) =
             console.error('Opportunity ID is missing.');
             return;
         }
-        onSubmit({ ...formData, opportunityId }); 
+        onSubmit({ ...formData, opportunityId });
     };
 
     return (
@@ -215,7 +215,7 @@ export const LoginModal = ({ onClose }) => {
         setError('')
 
         try {
-            const response = await axios.post('http://localhost:5000/users/login', { email, password }, { withCredentials: true })
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/login`, { email, password }, { withCredentials: true })
 
             const userData = response.data
             setLoading(false)
@@ -325,8 +325,91 @@ export const LoginModal = ({ onClose }) => {
 }
 
 
+// export const RegisterModal = ({ onClose }) => {
+//     const [userType, setUserType] = useState('student');
+//     const [email, setEmail] = useState('');
+//     const [password, setPassword] = useState('');
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate();
+
+//     const { loading, error, user } = useSelector((state) => state.auth);
+
+//     const handleSubmit = async (e) => {
+//         e.preventDefault();
+
+//         const credentials = {
+//             name: userType, 
+//             email,
+//             password,
+//             role: userType,
+//         };
+
+//         dispatch(registerUser(credentials));
+//     };
+
+//     if (user) {
+//         if (user.role === 'recruiter') {
+//             navigate('/admin'); 
+//         } else {
+//             navigate('/');
+//         }
+//         onClose();
+//     }
+//     return (
+//         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
+//             <div className="bg-white p-8 rounded-lg shadow-lg w-96 relative">
+//                 {/* Close Button */}
+//                 <button onClick={onClose} className="absolute top-4 right-4 text-gray-600 hover:text-gray-800">
+//                     <span className="text-2xl">&times;</span> {/* "X" symbol */}
+//                 </button>
+//                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">Register</h2>
+//                 <div className="flex justify-between mb-4">
+//                     <button
+//                         onClick={() => setUserType('student')}
+//                         className={`px-4 py-2 rounded-md ${userType === 'student' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+//                     >
+//                         Student
+//                     </button>
+//                     <button
+//                         onClick={() => setUserType('recruiter')}
+//                         className={`px-4 py-2 rounded-md ${userType === 'recruiter' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+//                     >
+//                         Recruiter
+//                     </button>
+//                 </div>
+//                 <form onSubmit={handleSubmit}>
+//                     <input
+//                         type="email"
+//                         placeholder="Email"
+//                         value={email}
+//                         onChange={(e) => setEmail(e.target.value)}
+//                         className="w-full px-4 py-2 mb-4 border rounded-md"
+//                         required
+//                     />
+//                     <input
+//                         type="password"
+//                         placeholder="Password"
+//                         value={password}
+//                         onChange={(e) => setPassword(e.target.value)}
+//                         className="w-full px-4 py-2 mb-4 border rounded-md"
+//                         required
+//                     />
+//                     <button
+//                         type="submit"
+//                         className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+//                         disabled={loading}
+//                     >
+//                         {loading ? 'Registering...' : `Register as ${userType.charAt(0).toUpperCase() + userType.slice(1)}`}
+//                     </button>
+//                 </form>
+//             </div>
+//         </div>
+//     );
+// };
+
 export const RegisterModal = ({ onClose }) => {
     const [userType, setUserType] = useState('student');
+    const [name, setName] = useState(''); // Added state for name
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
@@ -338,69 +421,126 @@ export const RegisterModal = ({ onClose }) => {
         e.preventDefault();
 
         const credentials = {
-            name: userType, 
+            name,
             email,
             password,
             role: userType,
         };
 
-        dispatch(registerUser(credentials));
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/register`, credentials, { withCredentials: true });
+
+            const userData = response.data;
+
+            dispatch(authcustomadd(userData.user));
+            onClose();
+
+            if (userData.user.role === 'recruiter') {
+                navigate('/admin');
+            } else {
+                navigate('/');
+            }
+        } catch (err) {
+            console.error(err);
+        }
     };
 
-    if (user) {
-        if (user.role === 'recruiter') {
-            navigate('/admin'); 
-        } else {
-            navigate('/');
+    useEffect(() => {
+        if (user) {
+            if (user.role === 'recruiter') {
+                navigate('/admin');
+            } else {
+                navigate('/');
+            }
+            onClose();
         }
-        onClose();
-    }
+    }, [user, navigate, onClose]);
+
     return (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-96 relative">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative">
+
                 {/* Close Button */}
                 <button onClick={onClose} className="absolute top-4 right-4 text-gray-600 hover:text-gray-800">
                     <span className="text-2xl">&times;</span> {/* "X" symbol */}
                 </button>
+
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">Register</h2>
-                <div className="flex justify-between mb-4">
-                    <button
-                        onClick={() => setUserType('student')}
-                        className={`px-4 py-2 rounded-md ${userType === 'student' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`}
-                    >
-                        Student
-                    </button>
-                    <button
-                        onClick={() => setUserType('recruiter')}
-                        className={`px-4 py-2 rounded-md ${userType === 'recruiter' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`}
-                    >
-                        Recruiter
-                    </button>
-                </div>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-4 py-2 mb-4 border rounded-md"
-                        required
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="w-full px-4 py-2 mb-4 border rounded-md"
-                        required
-                    />
-                    <button
+
+                {error && <p className="text-red-500 text-sm">{error}</p>}
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    {/* User Type Selection */}
+                    <div className="flex justify-between mb-4">
+                        <button
+                            type="button"
+                            onClick={() => setUserType('student')}
+                            className={`px-4 py-2 rounded-md ${userType === 'student' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+                        >
+                            Student
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setUserType('recruiter')}
+                            className={`px-4 py-2 rounded-md ${userType === 'recruiter' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+                        >
+                            Recruiter
+                        </button>
+                    </div>
+
+                    {/* Name Input */}
+                    <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Your Full Name"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+
+                    {/* Email Input */}
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="john@example.com"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+
+                    {/* Password Input */}
+                    <div>
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Enter your password"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+
+                    {/* Register Button */}
+                    <LoadingButton
+                        loading={loading}
+                        loadingPosition="start"
+                        startIcon={<LoginIcon />}
+                        variant="contained"
                         type="submit"
                         className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-                        disabled={loading}
                     >
                         {loading ? 'Registering...' : `Register as ${userType.charAt(0).toUpperCase() + userType.slice(1)}`}
-                    </button>
+                    </LoadingButton>
                 </form>
             </div>
         </div>

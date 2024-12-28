@@ -5,7 +5,7 @@ export const fetchOpportunities = createAsyncThunk(
     'opportunities/fetchOpportunities',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await axios.get('http://localhost:5000/opportunity/getall');
+            const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/opportunity/getall`);
             return response.data.opportunities;
         } catch (error) {
             return rejectWithValue(error.response?.data || "Error fetching opportunities");
@@ -18,7 +18,7 @@ export const postOpportunity = createAsyncThunk(
     'opportunities/postOpportunity',
     async (opportunityData, { rejectWithValue }) => {
         try {
-            const response = await axios.post('http://localhost:5000/opportunity/create', opportunityData);
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/opportunity/create`, opportunityData);
             return response.data.opportunity;
         } catch (error) {
             return rejectWithValue(error.response?.data || "Error posting opportunity");
@@ -31,7 +31,7 @@ export const getSingleOpportunity = createAsyncThunk(
     'opportunities/getSingleOpportunity',
     async (id, { rejectWithValue }) => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/v1/opportunities/${id}`);
+            const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/opportunity/${id}`);
             return response.data.opportunity;
         } catch (error) {
             return rejectWithValue(error.response?.data || "Error fetching opportunity");
@@ -44,7 +44,7 @@ export const updateOpportunity = createAsyncThunk(
     'opportunities/updateOpportunity',
     async ({ id, opportunityData }, { rejectWithValue }) => {
         try {
-            const response = await axios.put(`http://localhost:5000/api/v1/opportunities/${id}`, opportunityData);
+            const response = await axios.put(`${process.env.REACT_APP_BASE_URL}/opportunnity/${id}`, opportunityData);
             return response.data.opportunity;
         } catch (error) {
             return rejectWithValue(error.response?.data || "Error updating opportunity");
@@ -57,7 +57,7 @@ export const deleteOpportunity = createAsyncThunk(
     'opportunities/deleteOpportunity',
     async (id, { rejectWithValue }) => {
         try {
-            const response = await axios.delete(`http://localhost:5000/api/v1/opportunities/${id}`);
+            const response = await axios.delete(`${process.env.REACT_APP_BASE_URL}/opportunity/${id}`);
             return id;
         } catch (error) {
             return rejectWithValue(error.response?.data || "Error deleting opportunity");
@@ -69,7 +69,7 @@ export const applyToOpportunity = createAsyncThunk(
     'opportunities/apply',
     async ({ opportunityId, applicationData }, { rejectWithValue }) => {
         try {
-            const response = await axios.post(`http://localhost:5000/opportunity/apply/${opportunityId}`, applicationData, { withCredentials: true });
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/opportunity/apply/${opportunityId}`, applicationData, { withCredentials: true });
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response?.data || { message: error.message });

@@ -11,7 +11,7 @@ export default function AllJobsPosted() {
         setLoading(true);
         const fetchJobs = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/opportunity/recruiter', {
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/opportunity/recruiter`, {
                     withCredentials: true
                 });
                 setJobs(response.data.opportunities);
@@ -23,7 +23,7 @@ export default function AllJobsPosted() {
         };
         fetchJobs();
     }, []);
-    
+
 
     return (
         <>{loading ? <Loader /> : <div className="min-h-screen bg-gray-50 p-8">
@@ -37,7 +37,7 @@ export default function AllJobsPosted() {
 
                 <div className="bg-white rounded-lg shadow">
                     <div className="p-6">
-                        
+
                         <div className="overflow-x-auto">
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead className="bg-gray-50">

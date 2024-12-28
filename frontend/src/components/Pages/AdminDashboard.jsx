@@ -31,6 +31,7 @@ export default function AdminDashboard() {
     const [applications, setApplications] = useState([]);
     const [totalOpportunities, setTotalOpportunities] = useState(0); // State to store the total job count
     const { isAuthenticated, user } = useSelector((state) => state.opp);
+    const activeListingsCount = applications.filter(app => app.status === "applied").length;
 
     const stats = [
         {
@@ -45,7 +46,7 @@ export default function AdminDashboard() {
         },
         {
             title: "Active Listings",
-            value: "12", // This can be dynamically updated as well
+            value: activeListingsCount.toString(), // This can be dynamically updated as well
             icon: Calendar,
         },
     ];
@@ -102,7 +103,7 @@ export default function AdminDashboard() {
         try {
             setLoading(true);
             const response = await axios.post(
-                'http://localhost:5000/opportunity/create',
+                `${process.env.REACT_APP_BASE_URL}/opportunity/create`,
                 jobFormData,
                 { withCredentials: true }
             );
@@ -138,7 +139,7 @@ export default function AdminDashboard() {
         const fetchApplications = async () => {
             setLoading(true);
             try {
-                const response = await axios.get('http://localhost:5000/application/getallapplications', {
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/application/getallapplications`, {
                     withCredentials: true,
                 });
 
@@ -156,7 +157,7 @@ export default function AdminDashboard() {
         const fetchOpportunities = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get('http://localhost:5000/opportunity/recruiter', {
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/opportunity/recruiter`, {
                     withCredentials: true,
                 });
 

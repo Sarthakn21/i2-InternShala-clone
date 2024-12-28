@@ -37,12 +37,12 @@ const JobCard = ({ company, position, isHiring, location, stipend, duration,type
 );
 
 JobCard.propTypes = {
-    company: PropTypes.string.isRequired,
-    position: PropTypes.string.isRequired,
-    isHiring: PropTypes.bool.isRequired,
-    location: PropTypes.string.isRequired,
-    salary: PropTypes.string.isRequired,
-    duration: PropTypes.string.isRequired,
+    company: PropTypes.string,
+    position: PropTypes.string,
+    isHiring: PropTypes.bool,
+    location: PropTypes.string,
+    salary: PropTypes.string,
+    duration: PropTypes.string,
 };
 
 export default JobCard;

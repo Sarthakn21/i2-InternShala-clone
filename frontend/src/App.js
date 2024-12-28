@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       {user?.role != 'recruiter' ? <Navbar /> : ""}
-      
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         {user && user.role == "recruiter" ? (<Route path="/admin" element={<AdminDashboard />} />) : (<Route path="/admin" element={<HomePage />} />)}
