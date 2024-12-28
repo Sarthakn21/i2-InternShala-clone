@@ -90,7 +90,7 @@ export const ApplicationModal = ({ isOpen, onClose, onSubmit, opportunityId }) =
         skills: [],
         bio: '',
     });
-    const { opportunities, loading, error } = useSelector((state) => state.opp);
+    const { opportunities, loading } = useSelector((state) => state.opp);
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({
