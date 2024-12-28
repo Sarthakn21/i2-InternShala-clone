@@ -11,7 +11,7 @@ import cookieParser from "cookie-parser";
 import errorHandlerMiddleware from "./middlewares/error.js";
 
 const corsOptions = {
-    origin: true,
+    origin: 'https://i2-internshala-clone-frontend.onrender.com',
     credentials: true,
 };
 
