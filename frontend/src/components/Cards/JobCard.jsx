@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { MapPin, Clock, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { FaRupeeSign } from 'react-icons/fa';
 
-const JobCard = ({ company, position, isHiring, location, stipend, duration,type}) => (
+const JobCard = ({ company, position, isHiring, location, stipend, duration, type }) => (
     <div className="bg-slate-100 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
         <div className="flex justify-between items-start mb-4">
             <div>
@@ -22,7 +23,7 @@ const JobCard = ({ company, position, isHiring, location, stipend, duration,type
                 <span className="text-sm">{location}</span>
             </div>
             <div className="flex items-center text-gray-500">
-                <Clock className="w-4 h-4 mr-2" />
+                <FaRupeeSign className="w-4 h-4 mr-2" />
                 <span className="text-sm">{stipend}</span>
             </div>
             <div className="flex items-center text-gray-500">
