@@ -312,12 +312,7 @@ export const LoginModal = ({ onClose }) => {
                         Login
                     </LoadingButton>
 
-                    {/* Register Link */}
-                    <p className="text-center text-sm text-gray-600">
-                        New to Internshala? Register (
-                        <a href="#" className="text-blue-500 hover:underline">Student</a> {' / '}
-                        <a href="#" className="text-blue-500 hover:underline">Company</a>)
-                    </p>
+
                 </form>
             </div>
         </div>
