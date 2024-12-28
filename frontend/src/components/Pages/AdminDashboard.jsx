@@ -224,14 +224,7 @@ export default function AdminDashboard() {
                                 <h2 className="text-lg font-semibold text-gray-900">Recent Applications</h2>
                                 <div className="flex items-center gap-4">
                                     {/* Search */}
-                                    <div className="relative">
-                                        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
-                                        <input
-                                            type="text"
-                                            placeholder="Search applications..."
-                                            className="pl-8 pr-4 py-2 border rounded-md w-[250px]"
-                                        />
-                                    </div>
+                                        
 
                                     <div className="relative">
                                         <button
