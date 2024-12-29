@@ -4,14 +4,21 @@ import Navbar from './components/Navbar';
 import HomePage from './components/Homepage';
 import Internships from './components/Pages/Internships';
 import AdminDashboard from './components/Pages/AdminDashboard';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route ,useNavigate} from "react-router-dom";
 import AllJobsPosted from './components/Pages/AllJobsPosted';
 import { useSelector } from "react-redux";
 import Footer from './components/Cards/Footer';
 import Loader from './components/loader/Loader';
+import { useEffect } from 'react';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user?.role === "recruiter") {
+      navigate("/admin");
+    }
+  }, [user]);
 
   return (
     <>
