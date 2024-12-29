@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { fetchOpportunities, postOpportunity, getSingleOpportunity, updateOpportunity, deleteOpportunity, applyToOpportunity } from "../actions/opportunityActions";
+import { fetchOpportunities, postOpportunity, getSingleOpportunity, updateOpportunity, deleteOpportunity, applyToOpportunity, fetchOppToRecruiter } from "../actions/opportunityActions";
 
 // Fetch all opportunities (jobs and internships)
 
@@ -24,16 +24,30 @@ const opportunitySlice = createSlice({
     },
     extraReducers: (builder) => {
         // Fetch Opportunities
-        builder.addCase(fetchOpportunities.pending, (state) => {
-            state.loading = true;
-            state.error = null;
-        })
+        builder
+            .addCase(fetchOpportunities.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
             .addCase(fetchOpportunities.fulfilled, (state, action) => {
                 state.opportunities = action.payload;
                 state.loading = false;
                 state.message = "Opportunities fetched successfully!";
             })
             .addCase(fetchOpportunities.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(fetchOppToRecruiter.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchOppToRecruiter.fulfilled, (state, action) => {
+                state.opportunities = action.payload;
+                state.loading = false;
+                state.message = "Opportunities fetched successfully!";
+            })
+            .addCase(fetchOppToRecruiter.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

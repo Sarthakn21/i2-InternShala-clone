@@ -57,7 +57,7 @@ export const deleteOpportunity = createAsyncThunk(
     'opportunities/deleteOpportunity',
     async (id, { rejectWithValue }) => {
         try {
-            const response = await axios.delete(`${process.env.REACT_APP_BASE_URL}/opportunity/${id}`);
+            const response = await axios.delete(`${process.env.REACT_APP_BASE_URL}/opportunity/${id}`, {withCredentials: true});
             return id;
         } catch (error) {
             return rejectWithValue(error.response?.data || "Error deleting opportunity");
@@ -76,3 +76,15 @@ export const applyToOpportunity = createAsyncThunk(
         }
     }
 );
+
+export const fetchOppToRecruiter = createAsyncThunk('oppToRecruiter ', async (_, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/opportunity/recruiter`, {
+            withCredentials: true,
+        });
+        
+        return response.data.opportunities;
+    } catch (error) {
+        return rejectWithValue(error.response.data)
+    }
+})
