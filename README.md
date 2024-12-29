@@ -2,8 +2,6 @@
 ![Screenshot 2024-12-28 180815](https://github.com/user-attachments/assets/97303aeb-3935-45be-a8d9-f755b7aed50e)
 ![Screenshot 2024-12-28 222003](https://github.com/user-attachments/assets/07a78a60-646d-4804-890f-89ce3078cc2f)
 
-
-
 **Login:**
 ![Screenshot 2024-12-28 183130](https://github.com/user-attachments/assets/b377be24-c9ec-4798-93f9-eb19bbd767f6)
 
@@ -15,12 +13,15 @@
 
 **Jobs page :**
 ![Screenshot 2024-12-28 183214](https://github.com/user-attachments/assets/ff6f7a59-7b40-4004-92d2-42a620c73c16)
-![Screenshot 2024-12-28 183222](https://github.com/user-attachments/assets/e049c856-33dc-4f5b-95e4-bf43d259e5cb)
-
 
 **Admin Dashboard :**
 ![Screenshot 2024-12-28 183257](https://github.com/user-attachments/assets/7a8e6f92-c580-4b42-a3c5-fad93a5f493d)
 ![Screenshot 2024-12-28 183314](https://github.com/user-attachments/assets/9dd1a73c-a831-4bcb-88d4-87df179f752f)
+
+**Jobs Posted Page**:
+![Screenshot 2024-12-29 112644](https://github.com/user-attachments/assets/2f2b5638-bbdf-4177-b58c-f518b88abc68)
+![Screenshot 2024-12-29 112658](https://github.com/user-attachments/assets/008bda0e-0686-4ca5-873d-aee29d70147c)
+
 
 **Add Opportunity/Job :**
 ![Screenshot 2024-12-28 185559](https://github.com/user-attachments/assets/3e792d81-bdd5-436e-a73c-b547d2a56855)
