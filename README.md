@@ -1,6 +1,8 @@
 **Home Page** : 
 ![Screenshot 2024-12-28 180815](https://github.com/user-attachments/assets/97303aeb-3935-45be-a8d9-f755b7aed50e)
-![Screenshot 2024-12-28 180826](https://github.com/user-attachments/assets/c53337b8-7b25-4b47-9f2b-d19429a8f3d7)
+![Screenshot 2024-12-28 222003](https://github.com/user-attachments/assets/07a78a60-646d-4804-890f-89ce3078cc2f)
+
+
 
 **Login:**
 ![Screenshot 2024-12-28 183130](https://github.com/user-attachments/assets/b377be24-c9ec-4798-93f9-eb19bbd767f6)
